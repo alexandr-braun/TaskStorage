@@ -1,0 +1,17 @@
+*.o
+*.a
+*.so
+
+*.log
+
+*.exe
+*.test
+*.out
+
+/vendor/
+
+.idea/
+
+.vscode/
+
+.DS_Store
