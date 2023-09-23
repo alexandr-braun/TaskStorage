@@ -1,8 +1,20 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("Hello, %s !", r.URL.Path[1:])
+}
 
 func main() {
-	message := "Hello, World!"
-	fmt.Println(message)
+	http.HandleFunc("/", handler)
+	go func() {
+		log.Fatal(http.ListenAndServe(":8080", nil))
+	}()
+
+	select {} // Блокировка главной горутины бесконечно
 }
