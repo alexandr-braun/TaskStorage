@@ -1,0 +1,10 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: task_storage
+      POSTGRES_USER: task_storage
+      POSTGRES_PASSWORD: task_storage
+    ports:
+      - "5432:5432"
