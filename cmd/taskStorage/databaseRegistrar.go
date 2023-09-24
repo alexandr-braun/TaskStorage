@@ -8,6 +8,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
+// TODO Move to config file
 const (
 	host     = "localhost"
 	port     = 5432
