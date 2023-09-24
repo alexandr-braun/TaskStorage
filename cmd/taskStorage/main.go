@@ -11,6 +11,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	NewDatabaseRegistrar().addDatabase()
+
 	http.HandleFunc("/", handler)
 	go func() {
 		log.Fatal(http.ListenAndServe(":8080", nil))
