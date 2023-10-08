@@ -27,7 +27,20 @@ func (userRepository *UserRepository) Close() error {
 	return nil
 }
 
-func (userRepository *UserRepository) GetUser(id string) (domain.User, error) {
-	//TODO implement me
-	panic("implement me")
+func (userRepository *UserRepository) GetUser(id string) (*domain.User, error) {
+	var user domain.User
+
+	err := userRepository.db.QueryRow(context.Background(),
+		"SELECT id, first_name, middle_name, last_name"+
+			"FROM users"+
+			"WHERE id = $1", id).Scan(&user.Id, &user.FirstName, &user.MiddleName, &user.LastName)
+
+	if err != nil {
+		if err == pgx.ErrNoRows {
+			return nil, nil
+		}
+		return nil, err
+	}
+
+	return &user, nil
 }
