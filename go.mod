@@ -1,4 +1,4 @@
-module awesomeProject
+module taskStorage
 
 go 1.21
 
