@@ -4,5 +4,5 @@ type GetUserInfoQueryHandler struct {
 }
 
 func (h *GetUserInfoQueryHandler) Handle(query GetUserInfoQuery) {
-	// TODO add repository usage
+
 }
