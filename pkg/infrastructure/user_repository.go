@@ -27,7 +27,7 @@ func (userRepository *UserRepository) Close() error {
 	return nil
 }
 
-func (userRepository *UserRepository) GetUser(id string) domain.User {
+func (userRepository *UserRepository) GetUser(id string) (domain.User, error) {
 	//TODO implement me
 	panic("implement me")
 }
