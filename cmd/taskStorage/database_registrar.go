@@ -15,9 +15,9 @@ func NewDatabaseRegistrar() *DatabaseRegistrar {
 	return &DatabaseRegistrar{}
 }
 
-func (dr *DatabaseRegistrar) connectToDatabase(cfg *Config) {
-	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", cfg.Database.Host, cfg.Database.Port, cfg.Database.User, cfg.Database.Password, cfg.Database.DBName)
-	db, err := sql.Open("postgres", connStr)
+func (dr *DatabaseRegistrar) connectToDatabase(databaseConfig Database) {
+	connectionString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", databaseConfig.Host, databaseConfig.Port, databaseConfig.User, databaseConfig.Password, databaseConfig.DBName)
+	db, err := sql.Open("postgres", connectionString)
 	if err != nil {
 		log.Fatal(err)
 	}

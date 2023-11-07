@@ -17,7 +17,7 @@ func main() {
 		log.Fatalf("Error reading config: %v", err)
 	}
 
-	NewDatabaseRegistrar().connectToDatabase(cfg)
+	NewDatabaseRegistrar().connectToDatabase(cfg.Database)
 
 	// TODO init presentation layer
 	http.HandleFunc("/", handler)
