@@ -8,15 +8,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// TODO Move to config file
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "task_storage"
-	password = "task_storage"
-	dbname   = "task_storage"
-)
-
 type DatabaseRegistrar struct {
 }
 
@@ -24,8 +15,8 @@ func NewDatabaseRegistrar() *DatabaseRegistrar {
 	return &DatabaseRegistrar{}
 }
 
-func (dr *DatabaseRegistrar) connectToDatabase() {
-	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+func (dr *DatabaseRegistrar) connectToDatabase(cfg *Config) {
+	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", cfg.Database.Host, cfg.Database.Port, cfg.Database.User, cfg.Database.Password, cfg.Database.DBName)
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal(err)

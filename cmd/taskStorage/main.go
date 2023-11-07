@@ -12,7 +12,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	NewDatabaseRegistrar().connectToDatabase()
+	cfg, err := NewConfig()
+	if err != nil {
+		log.Fatalf("Error reading config: %v", err)
+	}
+
+	NewDatabaseRegistrar().connectToDatabase(cfg)
 
 	// TODO init presentation layer
 	http.HandleFunc("/", handler)
