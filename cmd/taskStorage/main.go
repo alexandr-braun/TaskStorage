@@ -12,7 +12,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	NewDatabaseRegistrar().addDatabase()
+	NewDatabaseRegistrar().connectToDatabase()
 
 	// TODO init presentation layer
 	http.HandleFunc("/", handler)
