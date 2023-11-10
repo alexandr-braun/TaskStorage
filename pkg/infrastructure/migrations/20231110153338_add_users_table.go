@@ -10,7 +10,7 @@ func init() {
 	goose.AddMigrationContext(upAddUsersTable, downAddUsersTable)
 }
 
-func upAddUsersTable(ctx context.Context, tx *sql.Tx) error {
+func upAddUsersTable(_ context.Context, tx *sql.Tx) error {
 	_, err := tx.Exec(`CREATE TABLE users (
         id SERIAL PRIMARY KEY,
         first_name VARCHAR(255),
@@ -20,7 +20,7 @@ func upAddUsersTable(ctx context.Context, tx *sql.Tx) error {
 	return err
 }
 
-func downAddUsersTable(ctx context.Context, tx *sql.Tx) error {
+func downAddUsersTable(_ context.Context, tx *sql.Tx) error {
 	_, err := tx.Exec("DROP TABLE IF EXISTS users")
 	return err
 }
