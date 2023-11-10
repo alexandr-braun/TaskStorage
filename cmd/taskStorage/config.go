@@ -19,7 +19,7 @@ type Database struct {
 
 func NewConfig() (*Config, error) {
 	var config Config
-	file, err := os.Open("config/config.json")
+	file, err := os.Open("cmd/taskStorage/config/config.json")
 	if err != nil {
 		return nil, err
 	}
