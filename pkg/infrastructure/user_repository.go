@@ -2,6 +2,7 @@ package infrastructure
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/jackc/pgx/v5"
 	"taskStorage/pkg/domain"
@@ -36,7 +37,7 @@ func (userRepository *UserRepository) GetUser(id string) (*domain.User, error) {
 			"WHERE id = $1", id).Scan(&user.Id, &user.FirstName, &user.MiddleName, &user.LastName)
 
 	if err != nil {
-		if err == pgx.ErrNoRows {
+		if errors.Is(err, pgx.ErrNoRows) {
 			return nil, nil
 		}
 		return nil, err
