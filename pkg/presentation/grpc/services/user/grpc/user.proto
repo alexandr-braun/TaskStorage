@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package user_service;
 
-option go_package = "github.com/alexandr-braun/TaskStorage/pkg/presentation/grpc/services/user_service";
+option go_package = "github.com/alexandr-braun/TaskStorage/pkg/presentation/grpc/services/grpc";
 
 message User {
   int32 id = 1;

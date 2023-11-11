@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.31.0
 // 	protoc        v4.25.0
-// source: pkg/presentation/grpc/services/user_service/user.proto
+// source: pkg/presentation/grpc/services/grpc/user.proto
 
-package user_service
+package grpc
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -359,19 +359,19 @@ func file_pkg_presentation_grpc_services_user_service_user_proto_rawDescGZIP() [
 
 var file_pkg_presentation_grpc_services_user_service_user_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_pkg_presentation_grpc_services_user_service_user_proto_goTypes = []interface{}{
-	(*User)(nil),               // 0: user_service.User
-	(*CreateUserRequest)(nil),  // 1: user_service.CreateUserRequest
-	(*CreateUserResponse)(nil), // 2: user_service.CreateUserResponse
-	(*GetUserRequest)(nil),     // 3: user_service.GetUserRequest
-	(*GetUserResponse)(nil),    // 4: user_service.GetUserResponse
+	(*User)(nil),               // 0: grpc.User
+	(*CreateUserRequest)(nil),  // 1: grpc.CreateUserRequest
+	(*CreateUserResponse)(nil), // 2: grpc.CreateUserResponse
+	(*GetUserRequest)(nil),     // 3: grpc.GetUserRequest
+	(*GetUserResponse)(nil),    // 4: grpc.GetUserResponse
 }
 var file_pkg_presentation_grpc_services_user_service_user_proto_depIdxs = []int32{
-	0, // 0: user_service.CreateUserResponse.user:type_name -> user_service.User
-	0, // 1: user_service.GetUserResponse.user:type_name -> user_service.User
-	1, // 2: user_service.UserService.CreateUser:input_type -> user_service.CreateUserRequest
-	3, // 3: user_service.UserService.GetUser:input_type -> user_service.GetUserRequest
-	2, // 4: user_service.UserService.CreateUser:output_type -> user_service.CreateUserResponse
-	4, // 5: user_service.UserService.GetUser:output_type -> user_service.GetUserResponse
+	0, // 0: grpc.CreateUserResponse.user:type_name -> grpc.User
+	0, // 1: grpc.GetUserResponse.user:type_name -> grpc.User
+	1, // 2: grpc.UserService.CreateUser:input_type -> grpc.CreateUserRequest
+	3, // 3: grpc.UserService.GetUser:input_type -> grpc.GetUserRequest
+	2, // 4: grpc.UserService.CreateUser:output_type -> grpc.CreateUserResponse
+	4, // 5: grpc.UserService.GetUser:output_type -> grpc.GetUserResponse
 	4, // [4:6] is the sub-list for method output_type
 	2, // [2:4] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name

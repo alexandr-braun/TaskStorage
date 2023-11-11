@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"taskStorage/pkg/infrastructure"
+	"taskStorage/pkg/presentation/grpc"
 )
 
 // TODO init query handlers separately
@@ -19,6 +20,7 @@ func main() {
 	}
 
 	infrastructure.NewDatabaseRegistrar().ConnectToDatabase(cfg.Database)
+	grpc.NewGrpcRegistrar().RegisterGrpcServices()
 
 	// TODO init presentation layer
 	http.HandleFunc("/", handler)

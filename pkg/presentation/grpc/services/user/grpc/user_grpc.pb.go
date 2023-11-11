@@ -2,15 +2,16 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v4.25.0
-// source: pkg/presentation/grpc/services/user_service/user.proto
+// source: pkg/presentation/grpc/services/grpc/user.proto
 
-package user_service
+package grpc
 
 import (
 	context "context"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	userServiceServer "taskStorage/pkg/presentation/grpc/services/user"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,8 +20,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	UserService_CreateUser_FullMethodName = "/user_service.UserService/CreateUser"
-	UserService_GetUser_FullMethodName    = "/user_service.UserService/GetUser"
+	UserService_CreateUser_FullMethodName = "/grpc.UserService/CreateUser"
+	UserService_GetUser_FullMethodName    = "/grpc.UserService/GetUser"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -85,7 +86,7 @@ type UnsafeUserServiceServer interface {
 	mustEmbedUnimplementedUserServiceServer()
 }
 
-func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
+func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv *userServiceServer.Server) {
 	s.RegisterService(&UserService_ServiceDesc, srv)
 }
 
@@ -129,7 +130,7 @@ func _UserService_GetUser_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var UserService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user_service.UserService",
+	ServiceName: "grpc.UserService",
 	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -142,5 +143,5 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "pkg/presentation/grpc/services/user_service/user.proto",
+	Metadata: "pkg/presentation/grpc/services/grpc/user.proto",
 }
