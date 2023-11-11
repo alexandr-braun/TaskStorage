@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"taskStorage/pkg/infrastructure"
 )
 
 // TODO init query handlers separately
@@ -17,7 +18,7 @@ func main() {
 		log.Fatalf("Error reading config: %v", err)
 	}
 
-	NewDatabaseRegistrar().connectToDatabase(cfg.Database)
+	infrastructure.NewDatabaseRegistrar().ConnectToDatabase(cfg.Database)
 
 	// TODO init presentation layer
 	http.HandleFunc("/", handler)

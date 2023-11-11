@@ -3,18 +3,11 @@ package main
 import (
 	"encoding/json"
 	"os"
+	"taskStorage/pkg/infrastructure"
 )
 
 type Config struct {
-	Database `json:"database"`
-}
-
-type Database struct {
-	Host     string `json:"host"`
-	Port     int    `json:"port"`
-	User     string `json:"user"`
-	Password string `json:"password"`
-	DBName   string `json:"dbname"`
+	Database infrastructure.DatabaseConfig `json:"database"`
 }
 
 func NewConfig() (*Config, error) {

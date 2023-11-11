@@ -1,4 +1,4 @@
-package main
+package infrastructure
 
 import (
 	"database/sql"
@@ -17,7 +17,7 @@ func NewDatabaseRegistrar() *DatabaseRegistrar {
 	return &DatabaseRegistrar{}
 }
 
-func (dr *DatabaseRegistrar) connectToDatabase(databaseConfig Database) {
+func (dr *DatabaseRegistrar) ConnectToDatabase(databaseConfig DatabaseConfig) {
 	connectionString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", databaseConfig.Host, databaseConfig.Port, databaseConfig.User, databaseConfig.Password, databaseConfig.DBName)
 	db, err := sql.Open("postgres", connectionString)
 	if err != nil {
