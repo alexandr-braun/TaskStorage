@@ -3,9 +3,11 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"github.com/pressly/goose/v3"
 	"log"
 
 	_ "github.com/lib/pq"
+	_ "taskStorage/pkg/infrastructure/migrations"
 )
 
 type DatabaseRegistrar struct {
@@ -31,6 +33,10 @@ func (dr *DatabaseRegistrar) connectToDatabase(databaseConfig Database) {
 	err = db.Ping()
 	if err != nil {
 		log.Fatal(err)
+	}
+
+	if err := goose.Up(db, "pkg/infrastructure/migrations"); err != nil {
+		log.Fatal("Error applying migrations:", err)
 	}
 
 	fmt.Println("Successfully connected!")
