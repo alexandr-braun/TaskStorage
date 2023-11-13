@@ -8,19 +8,19 @@ import (
 	"taskStorage/pkg/domain"
 )
 
-type UserRepository struct {
+type PostgreSqlUserRepository struct {
 	db *pgx.Conn
 }
 
-func NewUserRepository(connStr string) (*UserRepository, error) {
+func NewPostgreSqlUserRepository(connStr string) (*PostgreSqlUserRepository, error) {
 	db, err := pgx.Connect(context.Background(), connStr)
 	if err != nil {
 		return nil, fmt.Errorf("unable to connect to database: %v", err)
 	}
-	return &UserRepository{db: db}, nil
+	return &PostgreSqlUserRepository{db: db}, nil
 }
 
-func (userRepository *UserRepository) Close() error {
+func (userRepository *PostgreSqlUserRepository) Close() error {
 	err := userRepository.db.Close(context.Background())
 	if err != nil {
 		return fmt.Errorf("unable to connect to database: %v", err)
@@ -28,7 +28,7 @@ func (userRepository *UserRepository) Close() error {
 	return nil
 }
 
-func (userRepository *UserRepository) GetUser(id string) (*domain.User, error) {
+func (userRepository *PostgreSqlUserRepository) GetUser(id string) (*domain.User, error) {
 	var user domain.User
 
 	err := userRepository.db.QueryRow(context.Background(),
