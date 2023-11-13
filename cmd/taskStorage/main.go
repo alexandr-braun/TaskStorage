@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go.uber.org/fx"
 	"log"
 	"taskStorage/pkg/infrastructure"
 	"taskStorage/pkg/presentation/grpc"
@@ -12,7 +13,18 @@ func main() {
 		log.Fatalf("Error reading config: %v", err)
 	}
 
-	infrastructure.NewDatabaseRegistrar().ConnectToDatabase(cfg.Database)
+	app := fx.New(
+		fx.Provide(infrastructure.DatabaseConfig{Host: cfg.Database.Host,
+			Port:     cfg.Database.Port,
+			User:     cfg.Database.User,
+			Password: cfg.Database.Password,
+			DBName:   cfg.Database.DBName,
+		}),
+	)
+
+	app.Run()
+
+	infrastructure.NewDatabaseConnection().Connect(cfg.Database)
 	grpc.NewGrpcRegistrar().RegisterGrpcServices()
 
 	select {}
