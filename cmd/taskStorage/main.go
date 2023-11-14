@@ -19,12 +19,15 @@ func main() {
 			User:     cfg.Database.User,
 			Password: cfg.Database.Password,
 			DBName:   cfg.Database.DBName,
-		}),
+		},
+			infrastructure.NewPostgresqlConnectionFactory(),
+		),
 	)
 
 	app.Run()
 
-	infrastructure.NewDatabaseConnection().Connect(cfg.Database)
+	//TODO move config to DI
+	infrastructure.RunMigrations(cfg.Database)
 	grpc.NewGrpcRegistrar().RegisterGrpcServices()
 
 	select {}
