@@ -8,18 +8,28 @@ import (
 )
 
 type DBConnectionFactory interface {
-	NewConnection(databaseConfig DatabaseConfig) (*sql.DB, error)
+	NewConnection() (*sql.DB, error)
 }
 
 type PostgresqlConnectionFactory struct {
+	databaseConfig DatabaseConfig
 }
 
-func NewPostgresqlConnectionFactory() DBConnectionFactory {
-	return &PostgresqlConnectionFactory{}
+func NewPostgresqlConnectionFactory(databaseConfig DatabaseConfig) DBConnectionFactory {
+	return &PostgresqlConnectionFactory{
+		databaseConfig: databaseConfig,
+	}
 }
 
-func (*PostgresqlConnectionFactory) NewConnection(databaseConfig DatabaseConfig) (*sql.DB, error) {
-	connectionString := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", databaseConfig.Host, databaseConfig.Port, databaseConfig.User, databaseConfig.Password, databaseConfig.DBName)
+func (postgresqlConnectionFactory *PostgresqlConnectionFactory) NewConnection() (*sql.DB, error) {
+	connectionString := fmt.Sprintf(
+		"host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+		postgresqlConnectionFactory.databaseConfig.Host,
+		postgresqlConnectionFactory.databaseConfig.Port,
+		postgresqlConnectionFactory.databaseConfig.User,
+		postgresqlConnectionFactory.databaseConfig.Password,
+		postgresqlConnectionFactory.databaseConfig.DBName,
+	)
 	db, err := sql.Open("postgres", connectionString)
 	if err != nil {
 		return nil, err
