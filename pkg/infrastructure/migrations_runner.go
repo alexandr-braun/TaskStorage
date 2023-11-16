@@ -5,12 +5,14 @@ import (
 	"log"
 )
 
-func RunMigrations(databaseConfig DatabaseConfig) {
-	var connect, _ = NewPostgresqlConnectionFactory().NewConnection(databaseConfig)
-	if err := goose.Up(connect, "pkg/infrastructure/migrations"); err != nil {
+func RunMigrations(dbConnectionFactory DBConnectionFactory) error {
+	var dbConnection, _ = dbConnectionFactory.NewConnection()
+	if err := goose.Up(dbConnection, "pkg/infrastructure/migrations"); err != nil {
 		log.Fatal("Error applying migrations:", err)
 	}
 
 	// TODO handle the error
-	defer connect.Close()
+	defer dbConnection.Close()
+
+	return nil
 }

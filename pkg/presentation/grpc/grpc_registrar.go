@@ -13,9 +13,11 @@ func NewGrpcRegistrar() *Registrar {
 	return &Registrar{}
 }
 
-func (registrar *Registrar) RegisterGrpcServices() {
+func (registrar *Registrar) RegisterGrpcServices() error {
 	newGrpcServer := grpc.NewServer()
 	RegisterServices(newGrpcServer)
+
+	return nil
 }
 
 func RegisterServices(server *grpc.Server) {

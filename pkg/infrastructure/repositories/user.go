@@ -15,7 +15,7 @@ func NewPostgreSqlUserRepository(dbConnectionFactory infrastructure.DBConnection
 	return &PostgreSqlUserRepository{dbConnectionFactory: dbConnectionFactory}, nil
 }
 
-func (userRepository *PostgreSqlUserRepository) GetUser(id string) (*domain.User, error) {
+func (userRepository *PostgreSqlUserRepository) GetUser(id int32) (*domain.User, error) {
 	var user domain.User
 	var dbConnection, _ = userRepository.dbConnectionFactory.NewConnection()
 	defer dbConnection.Close()
