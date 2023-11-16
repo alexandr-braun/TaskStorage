@@ -19,6 +19,6 @@ func (s *Server) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUs
 	var getUserInfoQueryHandler = get_user_info.GetUserInfoQueryHandler{}
 
 	var userInfo = getUserInfoQueryHandler.Handle(getUserInfoQuery)
-	var result = converters.ToGrpcResponse(userInfo)
+	var result = converters.ToGrpcResponse(*userInfo)
 	return result, nil
 }
