@@ -11,7 +11,6 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	userServiceServer "taskStorage/pkg/presentation/grpc/services/user"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -86,7 +85,7 @@ type UnsafeUserServiceServer interface {
 	mustEmbedUnimplementedUserServiceServer()
 }
 
-func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv *userServiceServer.Server) {
+func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv *Server) {
 	s.RegisterService(&UserService_ServiceDesc, srv)
 }
 

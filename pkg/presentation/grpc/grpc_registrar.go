@@ -2,7 +2,6 @@ package grpc
 
 import (
 	"google.golang.org/grpc"
-	userServiceServer "taskStorage/pkg/presentation/grpc/services/user"
 	userServiceGrpc "taskStorage/pkg/presentation/grpc/services/user/grpc"
 )
 
@@ -23,5 +22,5 @@ func (registrar *Registrar) RegisterGrpcServices() error {
 func RegisterServices(server *grpc.Server) {
 	userServiceGrpc.RegisterUserServiceServer(
 		server,
-		&userServiceServer.Server{})
+		&userServiceGrpc.Server{})
 }
