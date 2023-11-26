@@ -3,7 +3,7 @@ package repositories
 import (
 	"errors"
 	"github.com/jackc/pgx/v5"
-	"taskStorage/pkg/domain"
+	"taskStorage/pkg/domain/user"
 	"taskStorage/pkg/infrastructure"
 )
 
@@ -15,8 +15,8 @@ func NewPostgreSqlUserRepository(dbConnectionFactory infrastructure.DBConnection
 	return &PostgreSqlUserRepository{dbConnectionFactory: dbConnectionFactory}, nil
 }
 
-func (userRepository *PostgreSqlUserRepository) GetUser(id int32) (*domain.User, error) {
-	var user domain.User
+func (userRepository *PostgreSqlUserRepository) GetUser(id int32) (*user.User, error) {
+	var user user.User
 	var dbConnection, _ = userRepository.dbConnectionFactory.NewConnection()
 	defer dbConnection.Close()
 

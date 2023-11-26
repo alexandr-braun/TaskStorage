@@ -1,7 +1,7 @@
 package get_user_info
 
 import (
-	"taskStorage/pkg/domain"
+	"taskStorage/pkg/domain/user"
 	"taskStorage/pkg/infrastructure_abstractions"
 )
 
@@ -13,7 +13,7 @@ func NewGetUserInfoQueryHandler(userRepository infrastructure_abstractions.UserR
 	return &GetUserInfoQueryHandler{userRepository: userRepository}
 }
 
-func (h *GetUserInfoQueryHandler) Handle(query GetUserInfoQuery) *domain.User {
+func (h *GetUserInfoQueryHandler) Handle(query GetUserInfoQuery) *user.User {
 	var user, _ = h.userRepository.GetUser(query.Id)
 	return user
 }
