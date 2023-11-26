@@ -1,13 +1,12 @@
-package main
+package configuration
 
 import (
 	"encoding/json"
 	"os"
-	"taskStorage/pkg/infrastructure"
 )
 
 type Config struct {
-	Database infrastructure.DatabaseConfig `json:"database"`
+	Database DatabaseConfig `json:"database"`
 }
 
 func NewConfig() *Config {

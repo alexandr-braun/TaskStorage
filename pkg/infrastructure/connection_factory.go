@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	_ "github.com/lib/pq"
+	"taskStorage/pkg/configuration"
 	_ "taskStorage/pkg/infrastructure/migrations"
 )
 
@@ -12,12 +13,12 @@ type DBConnectionFactory interface {
 }
 
 type PostgresqlConnectionFactory struct {
-	databaseConfig DatabaseConfig
+	databaseConfig configuration.DatabaseConfig
 }
 
-func NewPostgresqlConnectionFactory(databaseConfig DatabaseConfig) DBConnectionFactory {
+func NewPostgresqlConnectionFactory(config *configuration.Config) DBConnectionFactory {
 	return &PostgresqlConnectionFactory{
-		databaseConfig: databaseConfig,
+		databaseConfig: config.Database,
 	}
 }
 

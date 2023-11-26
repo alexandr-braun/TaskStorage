@@ -4,6 +4,7 @@ import (
 	"context"
 	"go.uber.org/fx"
 	"taskStorage/pkg/application/queries/get_user_info"
+	"taskStorage/pkg/configuration"
 	"taskStorage/pkg/infrastructure"
 	"taskStorage/pkg/infrastructure/repositories"
 	"taskStorage/pkg/presentation/grpc"
@@ -11,8 +12,8 @@ import (
 
 func main() {
 	app := fx.New(
-		fx.Provide(NewConfig,
-			infrastructure.NewDatabaseConfig,
+		fx.Provide(
+			configuration.NewConfig,
 			infrastructure.NewPostgresqlConnectionFactory,
 			repositories.NewPostgreSqlUserRepository,
 			get_user_info.NewGetUserInfoQueryHandler,
