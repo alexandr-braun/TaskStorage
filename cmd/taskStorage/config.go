@@ -10,19 +10,24 @@ type Config struct {
 	Database infrastructure.DatabaseConfig `json:"database"`
 }
 
-func NewConfig() (*Config, error) {
+func NewConfig() *Config {
 	var config Config
 	file, err := os.Open("cmd/taskStorage/config/config.json")
 	if err != nil {
-		return nil, err
+		panic(err)
 	}
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			panic(err)
+		}
+	}(file)
 
 	decoder := json.NewDecoder(file)
 	err = decoder.Decode(&config)
 	if err != nil {
-		return nil, err
+		panic(err)
 	}
 
-	return &config, nil
+	return &config
 }
