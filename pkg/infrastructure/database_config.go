@@ -7,3 +7,13 @@ type DatabaseConfig struct {
 	Password string `json:"password"`
 	DBName   string `json:"dbname"`
 }
+
+func NewDatabaseConfig(cfg *DatabaseConfig) DatabaseConfig {
+	return DatabaseConfig{
+		Host:     cfg.Host,
+		Port:     cfg.Port,
+		User:     cfg.User,
+		Password: cfg.Password,
+		DBName:   cfg.DBName,
+	}
+}
