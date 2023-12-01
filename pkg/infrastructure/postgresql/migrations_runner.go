@@ -1,12 +1,13 @@
-package infrastructure
+package postgresql
 
 import (
 	"database/sql"
 	"github.com/pressly/goose/v3"
 	"log"
+	"taskStorage/pkg/infrastructure_abstractions"
 )
 
-func RunMigrations(dbConnectionFactory DBConnectionFactory) error {
+func RunMigrations(dbConnectionFactory infrastructure_abstractions.DBConnectionFactory) error {
 	var dbConnection, dbConErr = dbConnectionFactory.NewConnection()
 	if dbConErr != nil {
 		log.Fatal("Error connecting to DB:", dbConErr)

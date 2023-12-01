@@ -5,8 +5,9 @@ import (
 	"go.uber.org/fx"
 	"taskStorage/pkg/application/queries/get_user_info"
 	"taskStorage/pkg/configuration"
-	"taskStorage/pkg/infrastructure"
-	"taskStorage/pkg/infrastructure/repositories"
+	"taskStorage/pkg/infrastructure/postgresql"
+	"taskStorage/pkg/infrastructure/postgresql/repositories"
+	"taskStorage/pkg/infrastructure_abstractions"
 	"taskStorage/pkg/presentation/grpc"
 )
 
@@ -14,15 +15,15 @@ func main() {
 	app := fx.New(
 		fx.Provide(
 			configuration.NewConfig,
-			infrastructure.NewPostgresqlConnectionFactory,
+			postgresql.NewPostgresqlConnectionFactory,
 			repositories.NewPostgreSqlUserRepository,
 			get_user_info.NewGetUserInfoQueryHandler,
 		),
 		fx.Invoke(
-			func(lifecycle fx.Lifecycle, dbFactory infrastructure.DBConnectionFactory) {
+			func(lifecycle fx.Lifecycle, dbFactory infrastructure_abstractions.DBConnectionFactory) {
 				lifecycle.Append(fx.Hook{
 					OnStart: func(context.Context) error {
-						return infrastructure.RunMigrations(dbFactory)
+						return postgresql.RunMigrations(dbFactory)
 					},
 				})
 				lifecycle.Append(fx.Hook{

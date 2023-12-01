@@ -4,14 +4,14 @@ import (
 	"errors"
 	"github.com/jackc/pgx/v5"
 	"taskStorage/pkg/domain/user"
-	"taskStorage/pkg/infrastructure"
+	"taskStorage/pkg/infrastructure_abstractions"
 )
 
 type PostgreSqlUserRepository struct {
-	dbConnectionFactory infrastructure.DBConnectionFactory
+	dbConnectionFactory infrastructure_abstractions.DBConnectionFactory
 }
 
-func NewPostgreSqlUserRepository(dbConnectionFactory infrastructure.DBConnectionFactory) (*PostgreSqlUserRepository, error) {
+func NewPostgreSqlUserRepository(dbConnectionFactory infrastructure_abstractions.DBConnectionFactory) (*PostgreSqlUserRepository, error) {
 	return &PostgreSqlUserRepository{dbConnectionFactory: dbConnectionFactory}, nil
 }
 
