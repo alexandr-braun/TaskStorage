@@ -6,13 +6,13 @@ import (
 	"time"
 )
 
-type TaskStatus string
+type Status string
 type PriorityLevel int
 
 const (
-	New        TaskStatus = "New"
-	InProgress TaskStatus = "InProgress"
-	Completed  TaskStatus = "Completed"
+	New        Status = "New"
+	InProgress Status = "InProgress"
+	Completed  Status = "Completed"
 )
 
 type Task struct {
@@ -20,7 +20,7 @@ type Task struct {
 	Title            string
 	Description      string
 	Priority         PriorityLevel
-	Status           TaskStatus
+	Status           Status
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 	Deadline         *time.Time
@@ -40,7 +40,7 @@ func (task *Task) AppendComment(comment string, user *user.User) {
 	task.Comments = append(task.Comments, Comment{UserId: user.Id, Text: comment, Timestamp: time.Now()})
 }
 
-func (task *Task) ChangeStatus(newStatus TaskStatus) error {
+func (task *Task) ChangeStatus(newStatus Status) error {
 	switch task.Status {
 	case New:
 		if newStatus == InProgress {

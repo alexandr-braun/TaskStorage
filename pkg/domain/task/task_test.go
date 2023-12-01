@@ -47,8 +47,8 @@ func TestAppendComment(t *testing.T) {
 
 func TestChangeStatus_ValidTransitions(t *testing.T) {
 	tests := []struct {
-		initialStatus TaskStatus
-		newStatus     TaskStatus
+		initialStatus Status
+		newStatus     Status
 		expectedError bool
 	}{
 		{New, InProgress, false},
@@ -78,8 +78,8 @@ func TestChangeStatus_ValidTransitions(t *testing.T) {
 
 func TestChangeStatus_InvalidTransitions(t *testing.T) {
 	tests := []struct {
-		initialStatus TaskStatus
-		newStatus     TaskStatus
+		initialStatus Status
+		newStatus     Status
 	}{
 		{New, Completed},
 		{InProgress, New},
