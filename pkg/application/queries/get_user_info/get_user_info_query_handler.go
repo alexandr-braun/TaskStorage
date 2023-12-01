@@ -14,6 +14,6 @@ func NewGetUserInfoQueryHandler(userRepository infrastructure_abstractions.UserR
 }
 
 func (h *GetUserInfoQueryHandler) Handle(query GetUserInfoQuery) *user.User {
-	var user, _ = h.userRepository.GetUser(query.Id)
-	return user
+	var dbUser, _ = h.userRepository.GetUser(query.Id)
+	return dbUser
 }

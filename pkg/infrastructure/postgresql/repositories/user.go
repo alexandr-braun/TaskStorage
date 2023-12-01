@@ -16,14 +16,14 @@ func NewPostgreSqlUserRepository(dbConnectionFactory infrastructure_abstractions
 }
 
 func (userRepository *PostgreSqlUserRepository) GetUser(id int32) (*user.User, error) {
-	var user user.User
-	var dbConnection, _ = userRepository.dbConnectionFactory.NewConnection()
-	defer dbConnection.Close()
+	var res user.User
+	var dbCon, _ = userRepository.dbConnectionFactory.NewConnection()
+	defer dbCon.Close()
 
-	err := dbConnection.QueryRow(
+	err := dbCon.QueryRow(
 		"SELECT id, first_name, middle_name, last_name"+
 			"FROM users"+
-			"WHERE id = $1", id).Scan(&user.Id, &user.FirstName, &user.MiddleName, &user.LastName)
+			"WHERE id = $1", id).Scan(&res.Id, &res.FirstName, &res.MiddleName, &res.LastName)
 
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
@@ -32,5 +32,5 @@ func (userRepository *PostgreSqlUserRepository) GetUser(id int32) (*user.User, e
 		return nil, err
 	}
 
-	return &user, nil
+	return &res, nil
 }
