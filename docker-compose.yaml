@@ -8,3 +8,24 @@ services:
       POSTGRES_PASSWORD: task_storage
     ports:
       - "5432:5432"
+
+  zookeeper:
+    image: arm64v8/zookeeper
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:
+      - /bin/sh
+      - -c
+      - |
+        sleep 10
+        /opt/kafka/bin/kafka-topics.sh --create --if-not-exists --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic user_created_events
