@@ -13,7 +13,7 @@ func RunMigrations(dbConnectionFactory infrastructure_abstractions.DBConnectionF
 		log.Fatal("Error connecting to DB:", dbConErr)
 	}
 
-	if err := goose.Up(dbConnection, "pkg/infrastructure/migrations"); err != nil {
+	if err := goose.Up(dbConnection, "pkg/infrastructure/postgresql/migrations"); err != nil {
 		log.Fatal("Error applying migrations:", err)
 	}
 

@@ -10,7 +10,7 @@ func init() {
 	goose.AddMigrationContext(upAddCommentsTable, downAddCommentsTable)
 }
 
-func upAddCommentsTable(ctx context.Context, tx *sql.Tx) error {
+func upAddCommentsTable(_ context.Context, tx *sql.Tx) error {
 	_, err := tx.Exec(`CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
@@ -23,7 +23,7 @@ func upAddCommentsTable(ctx context.Context, tx *sql.Tx) error {
 	return err
 }
 
-func downAddCommentsTable(ctx context.Context, tx *sql.Tx) error {
+func downAddCommentsTable(_ context.Context, tx *sql.Tx) error {
 	_, err := tx.Exec("DROP TABLE IF EXISTS comments")
 	return err
 }

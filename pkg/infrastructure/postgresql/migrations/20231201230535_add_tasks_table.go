@@ -10,7 +10,7 @@ func init() {
 	goose.AddMigrationContext(upAddTasksTable, downAddTasksTable)
 }
 
-func upAddTasksTable(ctx context.Context, tx *sql.Tx) error {
+func upAddTasksTable(_ context.Context, tx *sql.Tx) error {
 	_, err := tx.Exec(`CREATE TABLE tasks (
             id SERIAL PRIMARY KEY,
             title VARCHAR(255) NOT NULL,
@@ -27,7 +27,7 @@ func upAddTasksTable(ctx context.Context, tx *sql.Tx) error {
 	return err
 }
 
-func downAddTasksTable(ctx context.Context, tx *sql.Tx) error {
+func downAddTasksTable(_ context.Context, tx *sql.Tx) error {
 	_, err := tx.Exec("DROP TABLE IF EXISTS tasks")
 	return err
 }
